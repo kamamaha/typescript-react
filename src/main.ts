@@ -1,90 +1,103 @@
-//Array
+import { type } from "os"
 
-let stringArr = [ "one", "hey","Kama"];
+// Type Aliases
+type stringOrNumber =  string | number
 
-let guitars = ["Starat", "Les Paul", 5150]
-
-let mixedData = ["EVH", 1984, true]
-
-stringArr[0] = "AAA"
-stringArr.push("42")
-
-guitars[0] = 1234
-
-guitars.unshift("Jim")
-
-console.log(stringArr)
-
-let test = []
-let bands: string[] = []
-
-bands.push("Van Halen")
-
-//Tuple
-
-let myTuple: [string, number, boolean] = ["David", 42, true]
-
-let mixed = ["John", 1, false]
-
-mixed = myTuple
-myTuple[1] = 42
-
-//Object
-
-let myObj: object
-
-myObj = []
-console.log(typeof myObj)
-myObj = bands
-myObj = {}
-
-const exampleObj = {
-    prop1: "Kama",
-    prop2: true,
-}
-
-exampleObj.prop2 = false
+type stringOrNumberArray = (string | number)[]
 
 type Guitarist = {
     name?: string,
     active: boolean,
-    albums: (string | number)[]
+    albums: stringOrNumberArray
 }
 
-let evh: Guitarist = {
-    name: "Eddie",
-    active: false,
-    albums: [1984, 5150, "OUT"]
+type UserId = stringOrNumber
 
+//Literal types
+
+let myName: "Dave"
+
+let userName: "Dave" | "John" | "Amy"
+userName = "Amy"
+
+//Functions
+const add = (a:number, b:number): number => {
+    return a + b
 }
 
-let jp: Guitarist = {
-    name: "Jimmy",
-    active: false,
-    albums: ["313", "dddd", "qqq"]
-
+const logMsg = (message: any): void => {
+    console.log(message)
 }
-evh = jp
 
-//Funkcje
+logMsg("Hello")
+logMsg(add(2,3))
 
-const greetGuitairst = (guitarist : Guitarist) => {
-    if(guitarist.name) {
-        return `Hello ${guitarist.name.toUpperCase()}`
+let subtract = function ( c: number, d: number): number {
+    return c- d
+}
+
+type mathFunction = (a: number, b: number) => number
+// interface mathFunction { 
+//     (a: number, b: number): number
+// }
+
+let multiply: mathFunction = function (c, d) {
+    return c * d
+}
+
+logMsg(multiply(2, 2))
+
+
+//Optional parameters
+
+const addAll = (a: number, b: number, c?: number): number => {
+    if(typeof c !== 'undefined'){
+        return a + b + c
     }
-    return "hello!"
+    return a + b
 }
 
-console.log(greetGuitairst(jp))
+console.log(addAll(1,2,3))
+console.log(addAll(1,2))
 
-// Enumy
-
-enum Grade {
-    U = 1,
-    D,
-    C,
-    B,
-    A,
+//default param value
+const sumAll = (a: number = 10, b: number, c: number = 5): number => {
+   
+    return a + b + c 
 }
 
-console.log(Grade.U)
+console.log(sumAll(undefined,2))
+
+//Rest Parameters
+const total = (a: number, ...nums: number[]): number => {
+    return a + nums.reduce((prev, curr) => prev + curr)
+}
+
+logMsg(total(10, 2, 3))
+
+
+//Never
+const createError = (errMsg: string): never => {
+    throw new Error(errMsg)
+}
+
+const infinite =  () => {
+    let i: number = 1;
+    while(true) {
+        i++
+        if( i > 100) break
+    }
+}
+
+//custom type guard
+
+const isNumber = (value: any): boolean => {
+    return typeof value === 'number' ? true : false
+}
+
+//use of the never type
+const stringOrNumber = (value: number | string): string => {
+    if(typeof value === 'string') return 'string'
+    if(isNumber(value)) return 'number'
+    return createError('This sholud never happend')
+}
