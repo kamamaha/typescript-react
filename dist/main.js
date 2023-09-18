@@ -1,23 +1,44 @@
-// convert to more or les specific
-let a = "hello";
-let b = a; // less specific type
-let c = a; // more specific type
-let d = 'world';
-let dd = 'world';
-let e = 'world';
-const addOrConcat = (a, b, c) => {
-    if (c === 'add')
-        return a + b;
-    return '' + a + b;
+//Index Signatures
+const todaysTransaction = {
+    Pizza: -10,
+    Books: -5,
+    Job: 50,
 };
-let myVal = addOrConcat(2, 3, 'concat');
-//Be careful! TS sees no problem - but a string is returned
-let nextVal = addOrConcat(2, 3, 'concat');
-10;
-//The DOM
-const img = document.querySelector('img'); // more specific for ts = HTMLImageElement
-const img2 = document.querySelector('img');
-const myImg = document.getElementById('#img');
-img.src;
-img2.src;
-myImg.src;
+console.log(todaysTransaction.Pizza);
+console.log(todaysTransaction['Pizza']);
+let prop = 'Pizza';
+console.log(todaysTransaction[prop]);
+const todaysNet = (transactions) => {
+    let total = 0;
+    for (const transaction in transactions) {
+        total += transactions[transaction];
+    }
+    return total;
+};
+console.log(todaysNet(todaysTransaction));
+// todaysTransaction.Pizza = 40
+console.log(todaysTransaction['Dave']);
+const student = {
+    name: "Kama",
+    GPA: 5.5,
+    classes: [100, 200]
+};
+// console.log(student.test)
+for (const key in student) {
+    console.log(`${key}: ${student[key]}`);
+}
+Object.keys(student).map(key => {
+    console.log(student[key]);
+});
+const logStudentKey = (student, key) => {
+    console.log(`Student ${key}: ${student[key]}`);
+};
+logStudentKey(student, 'name');
+const monthlyIncomes = {
+    salary: 500,
+    bonus: 100,
+    sidehustle: 250
+};
+for (const revenue in monthlyIncomes) {
+    console.log(monthlyIncomes[revenue]);
+}
