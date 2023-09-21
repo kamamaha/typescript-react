@@ -34,12 +34,12 @@ const todaysNet = (transactions: TransactionObj): number => {
     return total
 }
 
-console.log(todaysNet(todaysTransaction))
+// console.log(todaysNet(todaysTransaction))
 
 
 // todaysTransaction.Pizza = 40
 
-console.log(todaysTransaction['Dave'])
+// console.log(todaysTransaction['Dave'])
 
 /////////////////////////////////////////////////////////////////////
 
