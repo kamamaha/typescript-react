@@ -1,13 +1,6 @@
-
-
-
 function App() {
-
-
   return (
-    <>
-
-     
+    <>    
     </>
   )
 }
