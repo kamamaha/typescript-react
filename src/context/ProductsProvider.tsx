@@ -1,4 +1,4 @@
-import { ReactElement, createContext, useState, useEffect } from "react";
+import { ReactElement, createContext, useState } from "react";
 
 export type ProductType = {
   sku: string;
@@ -37,7 +37,7 @@ type ChildrenType = {
 }
 
 export const ProductsProvider = ({ children }: ChildrenType): ReactElement => {
-    const [products, setProducts] = useState<ProductType[]>(initState)
+    const [products] = useState<ProductType[]>(initState)
 
     // useEffect(() => {
     //     const fetchProducts = async (): Promise<ProductType[]> => {
